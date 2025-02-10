@@ -6,8 +6,9 @@ export default function Nav() {
   return (
     <nav>
       <ul>
-        <Link>Movies</Link>
-        <Link>Series</Link>
+        <Link to={"/"}>Movies</Link>
+        {/* <Link>Movies</Link> */}
+        {/* <Link>Series</Link> */}
         <Link>Discover</Link>
       </ul>
       <Search></Search>

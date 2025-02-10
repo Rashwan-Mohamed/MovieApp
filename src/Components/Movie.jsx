@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 export default function Movie() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [rating, setRating] = useState(0);
   const [error, setError] = useState("");
   const params = useParams();
 
@@ -38,7 +39,28 @@ export default function Movie() {
       }
     };
     fetchData();
-  }, []);
+    getImdp();
+  }, [params]);
+
+  const getImdp = async () => {
+    const url = `https://imdb236.p.rapidapi.com/imdb/${movies?.id}/rating`;
+    const options = {
+      method: "GET",
+      headers: {
+        "x-rapidapi-key": "821ee858b6msh909fdc48832e2cbp1c3ab5jsn6166dc6d2568",
+        "x-rapidapi-host": "imdb236.p.rapidapi.com",
+      },
+    };
+
+    try {
+      const response = await fetch(url, options);
+      const result = await response.json();
+      setRating(result.averageRating);
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
@@ -58,6 +80,7 @@ export default function Movie() {
     status,
     origin_country,
     overview,
+    runtime,
     vote_average,
     tagline,
   } = movies;
@@ -78,10 +101,16 @@ export default function Movie() {
           />
         </header>
         <article className="movieArticle">
-          <h2 className="movieTitle">{title}</h2>
+          <h1 className="movieTitle">{title}</h1>
           <p className="moviePara">{overview}</p>
-          <p>Genres: {comGenre.slice(1)}</p>
-          <h4>average vote: {vote_average}</h4>
+          <h4>Genres: {comGenre.slice(1)}</h4>
+          {runtime && <h4 className="runTime"> run-time: {runtime} mintues</h4>}
+          {rating ? (
+            <h4>IMDP Rating: {rating}</h4>
+          ) : (
+            <h4>average vote: {vote_average}</h4>
+          )}
+
           <h4 className="moviePop">popularity: {popularity}</h4>
           <h4 className="releaseDate">release date: {release_date}</h4>
           <h4>status: {status}</h4>

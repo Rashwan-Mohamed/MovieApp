@@ -24,10 +24,10 @@ export default function Home() {
           <h1>Popular</h1>
           <NowPlaying whatShow={"now_playing"}></NowPlaying>
         </section>
-        <section className="viewGenre">
+        {/* <section className="viewGenre">
           <h1>Now Playing</h1>
           <NowPlaying whatShow={"popular"}></NowPlaying>
-        </section>
+        </section> */}
         <section className="viewGenre">
           <h1>Top Rated</h1>
           <NowPlaying whatShow={"top_rated"}></NowPlaying>

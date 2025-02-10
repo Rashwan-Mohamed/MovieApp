@@ -159,7 +159,6 @@ nav input:focus {
   display: flex;
   flex-direction: row;
   align-items: center;
-  position: relative;
 }
 .oneMovie {
   margin: auto;
@@ -208,9 +207,11 @@ nav input:focus {
   padding: 1rem;
   border-radius: 10px;
   position: absolute;
-  /* top: 50px; */
-  /* right: 30px; */
-  /* overflow-y: scroll; */
+  margin: auto;
+  max-height: 500px;
+  overflow-y: scroll;
+  right: 50px;
+  top: 50px;
 }
 .displayResults ul {
   display: flex;
