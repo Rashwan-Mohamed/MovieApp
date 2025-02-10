@@ -235,3 +235,29 @@ nav input:focus {
 li {
   list-style: none;
 }
+.twoColumns {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.twoColumns h1 {
+  font-size: 37px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.twoColumns a {
+  font-size: 30px;
+  transition: all 200ms ease-in-out;
+}
+.twoColumns a:hover {
+  color: #d70654;
+}
+.viewNos {
+  padding: 1rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+.gridEle {
+  /* height: 400px; */
+}

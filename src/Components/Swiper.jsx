@@ -36,8 +36,8 @@ export default function SwiperCom({ children }) {
       navigation={true}
       pagination={{ clickable: true }}
       //   scrollbar={{ draggable: true }}
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log("slide change")}
+      // onSwiper={(swiper) => console.log(swiper)}
+      // onSlideChange={() => console.log("slide change")}
     >
       {children}
     </Swiper>

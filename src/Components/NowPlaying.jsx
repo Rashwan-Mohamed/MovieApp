@@ -3,19 +3,23 @@ import SwiperCom from "./Swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 import { Link, useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { setMovies as patch } from "../features/mainSlice/moviesSlice";
 
 export default function NowPlaying({ whatShow }) {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const displayed = useSelector((state) => state.movies.displayed);
+  const dispatch = useDispatch();
   useEffect(() => {
+    const API_TOKEN = import.meta.env.VITE_TMDB_API_TOKEN;
+
     const options = {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNDgzYTdhN2M5YjhlZGNmN2RlZDYwNmU3ZjA5Mjg1NiIsIm5iZiI6MTY3NjczMTE0MS40MzkwMDAxLCJzdWIiOiI2M2YwZTMwNWEyNGM1MDAwODQ4YzkyZWUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.0ps3nbsJzYSZFnBf4KKb8DmG6An5hzSe5SKyT5RsqdQ",
+        Authorization: `Bearer ${API_TOKEN}`,
       },
     };
     const fetchData = async () => {
@@ -39,12 +43,24 @@ export default function NowPlaying({ whatShow }) {
     };
     fetchData();
   }, []);
+  useEffect(() => {
+    if (displayed === whatShow) {
+      dispatch(patch(movies));
+    }
+    return () => {
+      if (displayed === whatShow) {
+        dispatch(patch(movies));
+      }
+    };
+  }, [displayed]);
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
   if (error) {
     return <h1>An Error has occured, couldn't fetch movies info.</h1>;
   }
+  console.log(movies, displayed);
+
   return (
     <SwiperCom>
       {movies.map((movie) => {

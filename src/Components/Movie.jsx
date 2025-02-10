@@ -10,12 +10,13 @@ export default function Movie() {
   const params = useParams();
 
   useEffect(() => {
+    const API_TOKEN = import.meta.env.VITE_TMDB_API_TOKEN;
+
     const options = {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNDgzYTdhN2M5YjhlZGNmN2RlZDYwNmU3ZjA5Mjg1NiIsIm5iZiI6MTY3NjczMTE0MS40MzkwMDAxLCJzdWIiOiI2M2YwZTMwNWEyNGM1MDAwODQ4YzkyZWUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.0ps3nbsJzYSZFnBf4KKb8DmG6An5hzSe5SKyT5RsqdQ",
+        Authorization: `Bearer ${API_TOKEN}`,
       },
     };
 
@@ -44,10 +45,12 @@ export default function Movie() {
 
   const getImdp = async () => {
     const url = `https://imdb236.p.rapidapi.com/imdb/${movies?.id}/rating`;
+    const API_TOKEN = import.meta.env.VITE_IMDP_API_TOKEN;
+
     const options = {
       method: "GET",
       headers: {
-        "x-rapidapi-key": "821ee858b6msh909fdc48832e2cbp1c3ab5jsn6166dc6d2568",
+        "x-rapidapi-key": { API_TOKEN },
         "x-rapidapi-host": "imdb236.p.rapidapi.com",
       },
     };
