@@ -11,6 +11,7 @@ button {
   background: transparent;
   cursor: pointer;
   border: none;
+  font-family: "Oswald", serif;
 }
 a {
   text-decoration: none;
@@ -140,7 +141,7 @@ nav input {
   outline: none;
   background: transparent;
   border: 1px solid gainsboro;
-  padding: 5px 10px;
+  padding: 10px 20px;
   border-radius: 3px;
   transition: all ease-in-out 0.2s;
   color: white;
@@ -258,6 +259,142 @@ li {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 10px;
 }
+
+.viewNos {
+  /* gap: 10px; */
+  gap: 15px;
+  max-width: 1450px;
+  margin: auto;
+  padding-top: 4rem;
+  grid-template-columns: repeat(4, 300px);
+  place-content: center;
+  transition: all 2s ease-in-out;
+}
 .gridEle {
-  /* height: 400px; */
+  position: relative;
+}
+.gridEle img {
+  height: 100%;
+}
+
+.hovered {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.15s ease-in-out;
+}
+.hovered:hover {
+  background-color: #09122cb0;
+}
+
+.hovered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  gap: 20px 0;
+}
+
+div.gridEle > div > h1:nth-child(1) {
+  font-size: 30px;
+}
+
+div.gridEle > div > p:nth-child(3) {
+  text-align: left;
+  align-self: first baseline;
+}
+
+div.gridEle > div > p:nth-child(4) {
+  align-self: flex-start;
+}
+.circle-button {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #d70654;
+  color: #fff;
+  border-radius: 50%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.otherPages {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.otherPages {
+  grid-column: 1/-1;
+}
+.naviBtn {
+  color: white;
+  font-size: 16px;
+  text-transform: uppercase;
+  border: 2px solid #d70654;
+  padding: 2px 10px;
+}
+.buttonActive {
+  background-color: #d70654;
+  color: white;
+}
+.otherPages {
+  place-content: center;
+}
+.activeNink {
+  color: #d70654;
+}
+
+.movieArticle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto auto;
+
+  gap: 0;
+}
+
+.movieArticle .movieTitle {
+  grid-column: 1/-1;
+}
+
+.movieArticle .moviePara {
+  grid-column: 1/-1;
+}
+
+.movieArticle > h4:nth-child(3) {
+  /* grid-column: 1/-1; */
+}
+.movieArticle > h4 {
+  font-size: 19px;
+}
+.TagLine {
+  grid-column: 1/-1;
+}
+.movieArticle .moviePara {
+  line-height: 1.75;
+  font-size: 19px;
+}
+
+/* Element | http://localhost:5173/series/93405 */
+
+.oneSeries .lastEpisodeToAir {
+  display: flex;
+  flex-direction: column;
+  gap: 6px 0;
+}
+
+/* Element | http://localhost:5173/series/93405 */
+
+.oneSeries .lastEpisodeToAir > h4 {
+  font-size: 17px;
+}
+.airDates {
+  display: flex;
+  flex-direction: column;
+  gap: 5px 0;
 }

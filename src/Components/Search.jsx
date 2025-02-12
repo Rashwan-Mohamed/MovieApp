@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 export default function Search() {
@@ -9,7 +10,7 @@ export default function Search() {
   const refo = useRef();
   const nputRef = useRef();
   const navigate = useNavigate();
-
+  const series = useSelector((state) => state.movies.show);
   useEffect(() => {
     const doQuerySearch = async () => {
       const API_TOKEN = import.meta.env.VITE_TMDB_API_TOKEN;
@@ -20,11 +21,10 @@ export default function Search() {
           Authorization: `Bearer ${API_TOKEN}`,
         },
       };
+      //https://api.themoviedb.org/3/search/tv?query=Game%20Of%20Thrones&include_adult=false&language=en-US&page=1
       try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/search/movie?query=${value}&include_adult=false&language=en-US&page=1`,
-          options
-        );
+        let query = `https://api.themoviedb.org/3/search/${series == "series" ? "tv" : "movie"}?query=${value}&include_adult=false&language=en-US&page=1`;
+        const response = await fetch(query, options);
         if (!response.ok) {
           throw new Error("an error has occured during search");
         }
@@ -54,7 +54,53 @@ export default function Search() {
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
   }, []);
+  let reso;
 
+  if (series == "series") {
+    reso = (
+      <div ref={refo} className="displayResults">
+        {" "}
+        <ul>
+          {results.map((mov) => {
+            const { name, poster_path, first_air_date, id } = mov;
+            return (
+              <li onClick={() => navigate(`series/${id}`)} key={id}>
+                <img
+                  className="viewImg"
+                  src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
+                  alt="serachResultImage"
+                />
+                <p>{name}</p>
+                <p> {first_air_date}</p>
+              </li>
+            );
+          })}
+        </ul>{" "}
+      </div>
+    );
+  } else {
+    reso = (
+      <div ref={refo} className="displayResults">
+        {" "}
+        <ul>
+          {results.map((mov) => {
+            const { original_title, poster_path, release_date, id } = mov;
+            return (
+              <li onClick={() => navigate(`movies/${id}`)} key={id}>
+                <img
+                  className="viewImg"
+                  src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
+                  alt="serachResultImage"
+                />
+                <p>{original_title}</p>
+                <p> {release_date}</p>
+              </li>
+            );
+          })}
+        </ul>{" "}
+      </div>
+    );
+  }
   return (
     <>
       {" "}
@@ -79,32 +125,10 @@ export default function Search() {
           }}
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder="search movie"
+          placeholder={` search ${series == "series" ? "series" : "movie"}`}
         />
       </div>
-      {show ? (
-        <div ref={refo} className="displayResults">
-          {" "}
-          <ul>
-            {results.map((mov) => {
-              const { original_title, poster_path, release_date, id } = mov;
-              return (
-                <li onClick={() => navigate(`movies/${id}`)} key={id}>
-                  <img
-                    className="viewImg"
-                    src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
-                    alt="serachResultImage"
-                  />
-                  <p>{original_title}</p>
-                  <p> {release_date}</p>
-                </li>
-              );
-            })}
-          </ul>{" "}
-        </div>
-      ) : (
-        ""
-      )}
+      {show ? reso : ""}
     </>
   );
 }

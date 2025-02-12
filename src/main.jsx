@@ -8,6 +8,7 @@ import Movie from "./Components/Movie.jsx";
 import { Provider } from "react-redux";
 import { store } from "./App/store.js";
 import ViewMore from "./features/mainSlice/ViewMore.jsx";
+import { Series } from "./Components/Series.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -16,8 +17,14 @@ createRoot(document.getElementById("root")).render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Home />}></Route>
+            <Route path="/:Series" element={<Series />}></Route>
             <Route path="/movies/:id" element={<Movie />}></Route>
+            <Route path="/Series/:id" element={<Movie series={true} />}></Route>
             <Route path="/view/:genre" element={<ViewMore />}></Route>
+            <Route
+              path="/viewSeries/:genre"
+              element={<ViewMore series={true} />}
+            ></Route>
           </Route>
         </Routes>
       </BrowserRouter>

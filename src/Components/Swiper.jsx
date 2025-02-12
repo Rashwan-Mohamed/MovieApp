@@ -29,8 +29,8 @@ export default function SwiperCom({ children }) {
       ]}
       spaceBetween={20}
       freeMode={true}
-      momentumBounceRatio={1.5}
-      momentumRatio={1}
+      // momentumBounceRatio={1.5}
+      // momentumRatio={1}
       effect="coverFlow"
       slidesPerView={4}
       navigation={true}
