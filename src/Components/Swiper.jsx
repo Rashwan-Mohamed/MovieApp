@@ -13,7 +13,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css";
-import useWidth from "../useWidth";
+import useWidth from "../UseWidth";
 
 export default function SwiperCom({ children }) {
   const [movies, setMovies] = useState([]);
