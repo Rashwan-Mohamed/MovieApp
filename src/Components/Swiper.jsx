@@ -13,10 +13,14 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css";
+import useWidth from "../useWidth";
+
 export default function SwiperCom({ children }) {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const width = useWidth();
+
   return (
     <Swiper
       modules={[
@@ -27,14 +31,14 @@ export default function SwiperCom({ children }) {
         FreeMode,
         EffectCoverflow,
       ]}
-      spaceBetween={20}
+      spaceBetween={width < 1025 ? 10 : 20}
       freeMode={true}
-      // momentumBounceRatio={1.5}
-      // momentumRatio={1}
+      momentumBounceRatio={1}
+      momentumRatio={1}
       effect="coverFlow"
-      slidesPerView={4}
+      slidesPerView={width < 1025 ? 3 : 4}
       navigation={true}
-      pagination={{ clickable: true }}
+      pagination={width > 768 && { clickable: true }}
       //   scrollbar={{ draggable: true }}
       // onSwiper={(swiper) => console.log(swiper)}
       // onSlideChange={() => console.log("slide change")}

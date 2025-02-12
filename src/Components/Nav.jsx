@@ -40,7 +40,7 @@ export default function Nav() {
 
         {/* <Link>Movies</Link> */}
         {/* <Link>Series</Link> */}
-        <Link>Discover</Link>
+        {/* <Link>Discover</Link> */}
       </ul>
       <Search></Search>
     </nav>

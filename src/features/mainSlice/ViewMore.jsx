@@ -4,8 +4,24 @@ import { useParams } from "react-router";
 import SmallMovie from "../../Components/SmallMovie";
 import { getMovies } from "./moviesSlice";
 import SetPage from "../../Components/SetPage";
+import useWidth from "../../UseWidth";
 export default function ViewMore({ series }) {
+  const width = useWidth();
   let initialLimit = 15;
+  let wordLimit;
+  if (width < 1250) {
+    wordLimit = 150;
+  }
+  if (width < 1025) {
+    initialLimit = 10;
+  }
+  if (width < 768) {
+    initialLimit = 7;
+  }
+  if (width < 500) {
+    initialLimit = 5;
+  }
+  // if()
   const movies = useSelector((state) => state.movies.movies);
   const [limit, setLimit] = useState(initialLimit);
   const [page, setPage] = useState(1);
@@ -50,14 +66,17 @@ export default function ViewMore({ series }) {
       setLimit(limit - 4);
     }
   }, [page]);
-  if (movies.length == 0 || status == "pending") {
-    return <h1>Loading</h1>;
-  }
-
   const reSetPage = () => {
     setPage(1);
     setLimit(initialLimit);
   };
+  useEffect(() => {
+    reSetPage();
+  }, [width]);
+  if (movies.length == 0 || status == "pending") {
+    return <h1>Loading</h1>;
+  }
+
   let totalLength = movies.total_pages ?? 1;
   let totalPagess = Array.from({ length: totalLength }, (_, index) => {
     const pageNumber = index + 1;
@@ -81,6 +100,7 @@ export default function ViewMore({ series }) {
           page={page}
           setPage={setPage}
           totalPagess={slicedTotal}
+          reSetPage={reSetPage}
         ></SetPage>
         {movies.results.map((movie) => {
           return (

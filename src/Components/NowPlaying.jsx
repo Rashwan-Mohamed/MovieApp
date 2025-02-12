@@ -78,7 +78,7 @@ export default function NowPlaying({ whatShow, series }) {
                   alt=""
                 />
               </Link>
-              <p>Average Vote: {vote_average}</p>
+              <p className="avgt"> Vote: {vote_average}</p>
               {/* {release_date.split("-")[0]} */}
             </div>
           </SwiperSlide>

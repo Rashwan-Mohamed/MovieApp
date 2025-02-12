@@ -1,28 +1,23 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router";
+import useWidth from "../UseWidth";
 
-export default function SmallMovie({
-  title,
-  poster_path,
-  backdrop_path,
-  overview,
-  popularity,
-  release_date,
-  vote_average,
-  vote_count,
-  genres,
-  id,
-  passed,
-  series,
-}) {
+export default function SmallMovie({ passed, series }) {
+  const width = useWidth();
+  let wordLimit = 250;
+  if (width < 1250) {
+    wordLimit = 150;
+  }
+  if (width < 1025) {
+    wordLimit = 100;
+  }
+  if (width < 768) {
+    wordLimit = 50;
+  }
   const [hover, setHover] = useState(false);
   const navigate = useNavigate();
   let whare;
-  let comGenre = "";
 
-  genres?.forEach((gene) => {
-    comGenre = comGenre + ", " + gene.name;
-  });
   if (series) {
     const {
       adult,
@@ -42,12 +37,8 @@ export default function SmallMovie({
       vote_count,
     } = passed;
     whare = (
-      <div
-        onClick={() => navigate(`/series/${id}`)}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-        className="gridEle"
-      >
+      <>
+        {" "}
         <Link to={`/series/${id}`}>
           <img
             className="movieView"
@@ -58,17 +49,20 @@ export default function SmallMovie({
         {hover && (
           <div className="hovered">
             <h1 className="Tite">{name}</h1>
-            <p>
-              {overview.length > 250
-                ? overview.slice(0, 250) + ",  CLICK TO SEE MORE"
-                : overview}
-            </p>
+            {width > 500 && (
+              <p>
+                {overview.length > wordLimit
+                  ? overview.slice(0, wordLimit) + ", CLICK TO SEE MORE"
+                  : overview}
+              </p>
+            )}
+
             <p>Average Vote: {vote_average}</p>
-            <p>{first_air_date.split("-")[0]}</p>
+            <p>{first_air_date?.split("-")[0]}</p>
             {/* <p>{comGenre.slice(1)}</p> */}
           </div>
         )}
-      </div>
+      </>
     );
   } else {
     const {
@@ -83,13 +77,14 @@ export default function SmallMovie({
       genres,
       id,
     } = passed;
+    let comGenre = "";
+
+    genres?.forEach((gene) => {
+      comGenre = comGenre + ", " + gene.name;
+    });
     whare = (
-      <div
-        onClick={() => navigate(`/movies/${id}`)}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-        className="gridEle"
-      >
+      <>
+        {" "}
         <Link to={`/movies/${id}`}>
           <img
             className="movieView"
@@ -100,19 +95,35 @@ export default function SmallMovie({
         {hover && (
           <div className="hovered">
             <h1 className="Tite">{title}</h1>
-            <p>
-              {overview.length > 250
-                ? overview.slice(0, 250) + ",  CLICK TO SEE MORE"
-                : overview}
-            </p>
-            <p>Average Vote: {vote_average}</p>
-            <p>{release_date.split("-")[0]}</p>
+            {width > 500 && (
+              <p>
+                {overview.length > wordLimit
+                  ? overview.slice(0, wordLimit) + ", CLICK TO SEE MORE"
+                  : overview}
+              </p>
+            )}
+            <p> Average Vote: {vote_average}</p>
+            <p>{release_date?.split("-")[0]}</p>
             <p>{comGenre.slice(1)}</p>
           </div>
         )}
-      </div>
+      </>
     );
   }
-
-  return <>{whare}</>;
+  if (!whare) {
+    return <h1>Error</h1>;
+  }
+  return (
+    <>
+      <div
+        onClick={() => navigate(`/series/${id}`)}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        className="gridEle"
+      >
+        {" "}
+        {whare}
+      </div>
+    </>
+  );
 }

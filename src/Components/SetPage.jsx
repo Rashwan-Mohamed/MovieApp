@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import useWidth from "../UseWidth";
 
 export default function SetPage({ page, setPage, totalPagess, reSetPage }) {
+  const width = useWidth();
   return (
     <section className="otherPages">
       <button
@@ -20,11 +22,13 @@ export default function SetPage({ page, setPage, totalPagess, reSetPage }) {
         }}
         className="naviBtn"
       >
-        {"<<"} previous
+        {"<<"}
+        {width > 500 && "previous"}
       </button>
       {totalPagess}
       <button onClick={() => setPage(page + 1)} className="naviBtn">
-        next {">>"}
+        {width > 500 && "next"}
+        {">>"}
       </button>
     </section>
   );
