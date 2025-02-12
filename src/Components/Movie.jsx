@@ -117,7 +117,7 @@ export default function Movie({ series }) {
           />
         </header>
         <article className="movieArticle">
-          <h1 className="movieTitle">{title}</h1>
+          <h1 className="movieTitle noMoviesTitle">{title}</h1>
           <p className="moviePara">{overview}</p>
           <h4>Genres: {comGenre.slice(1)}</h4>
           {runtime && <h4 className="runTime"> run-time: {runtime} mintues</h4>}

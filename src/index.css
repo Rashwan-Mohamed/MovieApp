@@ -411,6 +411,11 @@ div.gridEle > div > p:nth-child(4) {
   .viewNos {
     grid-template-columns: repeat(4, 1fr);
   }
+
+  .oneMovie {
+    max-width: fit-content;
+    padding: 2rem;
+  }
 }
 
 /* 1025px - 1249px */
@@ -423,6 +428,13 @@ div.gridEle > div > p:nth-child(4) {
   div.gridEle > div > h1:nth-child(1) {
     font-size: 22px;
   }
+
+  .oneMovie {
+    gap: 0 30px;
+  }
+  .movieArticle .movieTitle {
+    font-size: 45px;
+  }
 }
 
 /* 768px - 1024px */
@@ -433,6 +445,20 @@ div.gridEle > div > p:nth-child(4) {
 
   .hovered {
     padding: 10px;
+  }
+  .movieArticle .movieTitle {
+    font-size: 35px;
+  }
+
+  .movieArticle .moviePara {
+    font-size: 17px;
+  }
+
+  .movieArticle > h4 {
+    font-size: 16px;
+  }
+  .oneMovie {
+    padding: 2rem 1rem;
   }
 }
 
@@ -458,7 +484,7 @@ div.gridEle > div > p:nth-child(4) {
   .groupMovies {
     padding-top: 2rem;
   }
-  .movieTitle {
+  .swipperContent .movieTitle {
     display: none;
   }
 
@@ -494,6 +520,38 @@ div.gridEle > div > p:nth-child(4) {
   }
   .viewNos {
     padding: 1rem 10px;
+  }
+  /* // */
+
+  /* Element | http://localhost:5173/movies/939243 */
+
+  .oneMovie {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  /* Element | http://localhost:5173/movies/939243 */
+
+  .oneMovie > header:nth-child(1) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Inline #1 | http://localhost:5173/movies/939243 */
+
+  .movieArticle .movieTitle {
+    position: relative;
+  }
+
+  .movieArticle {
+    padding: 0;
+    gap: 20px 0;
+    margin-bottom: 1rem;
+  }
+
+  .TagLine {
+    grid-row: 2;
   }
 }
 
@@ -569,5 +627,37 @@ div.gridEle > div > p:nth-child(4) {
   .naviBtn {
     font-size: 13px;
     padding: 2px 10px;
+  }
+
+  /* Inline #1 | http://localhost:5173/movies/1249289 */
+
+  .movieArticle > h4 {
+    /* font-size: 16px; */
+    font-size: 15px;
+    grid-column: 1/-1;
+  }
+
+  .dp {
+    grid-column: 1/-1;
+    place-self: flex-end;
+  }
+  .oneMovie {
+    flex-direction: column;
+  }
+
+  .movieArticle {
+    grid-template-columns: auto;
+  }
+
+  .oneSeries .lastEpisodeToAir > h4 {
+    font-size: 16px;
+  }
+
+  .oneSeries .lastEpisodeToAir {
+    border: 1px solid #52616b;
+    padding: 5px;
+  }
+  .movieArticle > h4 {
+    border-bottom: 2px solid #52616b;
   }
 }
